@@ -1,5 +1,6 @@
 package br.edu.atitus.product_service.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,8 @@ public class OpenProductController {
 		super();
 		this.repository = repository;
 	}
-	
+	@Value("${server.port}")
+	private int serverPort;
 	@GetMapping("/{id}/{targetCurrency}")
 	public ResponseEntity<ProductEntity> getProductWithCurrency(
 	        @PathVariable Long id,
@@ -30,6 +32,8 @@ public class OpenProductController {
 	            .orElseThrow(() -> new Exception("Product not found"));
 
 	    product.setConvertedPrice(product.getPrice());
+	    
+	    product.setEnviroment("Product-service running on port: " + serverPort);
 
 	    return ResponseEntity.ok(product);
 	}

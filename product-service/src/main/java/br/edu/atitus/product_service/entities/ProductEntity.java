@@ -100,8 +100,8 @@ public class ProductEntity {
 		return enviroment;
 	}
 
-	public void setEnvironment(String environment) {
-		this.enviroment = environment;
+	public void setEnviroment(String enviroment) {
+		this.enviroment = enviroment;
 	}
 
 	public double getConvertedPrice() {
